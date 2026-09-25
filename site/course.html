@@ -1,0 +1,1143 @@
+<title>Стратегия за 20 недель</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Literata:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+:root{
+  --bg:#F5F5F2; --surface:#FFFFFF; --surface-2:#EFEEE9;
+  --ink:#1B1C1E; --ink-2:#56534E; --ink-3:#8A857E;
+  --line:#DEDCD6; --line-soft:#E9E7E2;
+  --accent:#A65A2C; --accent-soft:#F2E5DA;
+  --blue:#3D5A73; --ok:#3F7A4D; --warn:#946821; --danger:#A33B32;
+  --ui:'Golos Text',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --serif:'Literata',Georgia,'Times New Roman',serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SF Mono',Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#141517; --surface:#1C1E21; --surface-2:#24262A;
+    --ink:#EBE8E3; --ink-2:#A8A39B; --ink-3:#7A756D;
+    --line:#2F3236; --line-soft:#26292D;
+    --accent:#D9874F; --accent-soft:#33261C;
+    --blue:#7FA3C0; --ok:#6FB47F; --warn:#D6A44E; --danger:#E07A6E;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#141517; --surface:#1C1E21; --surface-2:#24262A;
+  --ink:#EBE8E3; --ink-2:#A8A39B; --ink-3:#7A756D;
+  --line:#2F3236; --line-soft:#26292D;
+  --accent:#D9874F; --accent-soft:#33261C;
+  --blue:#7FA3C0; --ok:#6FB47F; --warn:#D6A44E; --danger:#E07A6E;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);
+  font-size:16px;line-height:1.5;-webkit-text-size-adjust:100%}
+
+/* ---------- shell ---------- */
+.shell{display:grid;grid-template-columns:272px minmax(0,1fr);gap:0;
+  max-width:1180px;margin:0 auto;align-items:start}
+.sidebar{position:sticky;top:env(safe-area-inset-top,0px);height:100vh;
+  overflow-y:auto;border-right:1px solid var(--line);padding:26px 18px 40px;
+  background:var(--bg)}
+.brand{display:block;text-align:left;width:100%;background:none;border:0;
+  padding:0 0 18px;cursor:pointer;font-family:var(--ui);color:inherit}
+.brand b{display:block;font-size:17px;font-weight:700;letter-spacing:-.01em}
+.brand span{display:block;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-top:5px}
+.navgroup{margin-top:20px}
+.navgroup h4{font-family:var(--mono);font-size:10px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-3);margin:0 0 8px;font-weight:500}
+.nav{display:flex;flex-direction:column;gap:1px}
+.nav button{display:flex;align-items:baseline;gap:9px;width:100%;text-align:left;
+  background:none;border:0;border-radius:6px;padding:7px 9px;cursor:pointer;
+  font-family:var(--ui);font-size:14.5px;color:var(--ink-2);line-height:1.35}
+.nav button:hover{background:var(--surface-2);color:var(--ink)}
+.nav button[aria-current="true"]{background:var(--accent-soft);color:var(--ink);font-weight:600}
+.nav .num{font-family:var(--mono);font-size:11px;color:var(--ink-3);flex:0 0 auto}
+.nav button[aria-current="true"] .num{color:var(--accent)}
+
+.main{padding:44px 40px 96px;min-width:0}
+
+/* ---------- topbar (mobile) ---------- */
+.topbar{display:none;position:sticky;top:0;z-index:20;background:var(--bg);
+  border-bottom:1px solid var(--line);
+  padding:10px 16px;padding-top:calc(10px + env(safe-area-inset-top,0px));
+  align-items:center;gap:12px}
+.topbar b{font-size:15px;font-weight:700;flex:1;min-width:0;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap}
+.iconbtn{background:var(--surface);border:1px solid var(--line);border-radius:8px;
+  color:var(--ink);font-family:var(--ui);font-size:13px;font-weight:500;
+  padding:7px 11px;cursor:pointer}
+.iconbtn:hover{border-color:var(--accent)}
+
+/* ---------- typography ---------- */
+.page{max-width:68ch}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+h1{font-size:clamp(27px,5vw,38px);line-height:1.12;letter-spacing:-.022em;
+  font-weight:700;margin:0 0 14px;text-wrap:balance}
+h2{font-size:21px;line-height:1.25;letter-spacing:-.012em;font-weight:600;
+  margin:38px 0 12px;text-wrap:balance}
+h3{font-size:16.5px;font-weight:600;margin:26px 0 8px;text-wrap:balance}
+.lede{font-family:var(--serif);font-size:18px;line-height:1.58;color:var(--ink-2);
+  margin:0 0 26px}
+p{font-family:var(--serif);font-size:16.5px;line-height:1.66;margin:0 0 15px}
+li{font-family:var(--serif);font-size:16.5px;line-height:1.62;margin:0 0 7px}
+ul,ol{padding-left:22px;margin:0 0 16px}
+strong{font-weight:600;color:var(--ink)}
+em{font-style:italic}
+a{color:var(--accent);text-underline-offset:2px}
+hr{border:0;border-top:1px solid var(--line);margin:34px 0}
+code{font-family:var(--mono);font-size:.87em;background:var(--surface-2);
+  padding:1px 5px;border-radius:4px}
+
+/* ---------- components ---------- */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;
+  padding:20px 22px;margin:0 0 14px}
+.card h3{margin-top:0}
+.card p:last-child,.card ul:last-child,.card ol:last-child{margin-bottom:0}
+
+.note{border-left:3px solid var(--accent);background:var(--surface);
+  border-radius:0 10px 10px 0;padding:15px 18px;margin:0 0 18px}
+.note.warn{border-left-color:var(--danger)}
+.note.info{border-left-color:var(--blue)}
+.note p:last-child{margin-bottom:0}
+.note .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--accent);display:block;margin-bottom:6px}
+.note.warn .lbl{color:var(--danger)}
+.note.info .lbl{color:var(--blue)}
+
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));
+  margin:0 0 18px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:12px;
+  padding:16px 17px;display:flex;flex-direction:column;gap:5px}
+.tile .k{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-3)}
+.tile .v{font-size:21px;font-weight:700;letter-spacing:-.015em;
+  font-variant-numeric:tabular-nums}
+.tile .s{font-family:var(--serif);font-size:13.5px;color:var(--ink-2);line-height:1.45}
+
+.tablewrap{overflow-x:auto;margin:0 0 20px;border:1px solid var(--line);
+  border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:440px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line-soft);
+  font-size:14.5px;vertical-align:top;line-height:1.45}
+th{font-family:var(--ui);font-weight:600;font-size:12px;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--ink-3);white-space:nowrap}
+td{font-family:var(--serif)}
+tr:last-child td{border-bottom:0}
+td.n{font-family:var(--mono);font-size:12.5px;color:var(--ink-3);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.pill{display:inline-block;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:99px;
+  border:1px solid var(--line);color:var(--ink-3);white-space:nowrap}
+.pill.on{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.pill.ok{border-color:var(--ok);color:var(--ok)}
+
+.mark{font-family:var(--mono);font-size:11px;font-weight:500;padding:1px 6px;
+  border-radius:4px;border:1px solid var(--line);color:var(--ink-3);
+  white-space:nowrap;vertical-align:1px}
+.mark.y{color:var(--ok);border-color:var(--ok)}
+.mark.q{color:var(--warn);border-color:var(--warn)}
+.mark.t{color:var(--blue);border-color:var(--blue)}
+
+/* module list */
+.mods{display:flex;flex-direction:column;gap:0;border:1px solid var(--line);
+  border-radius:12px;overflow:hidden;background:var(--surface);margin:0 0 20px}
+.mod{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:13px;
+  align-items:baseline;padding:14px 16px;border-bottom:1px solid var(--line-soft);
+  width:100%;background:none;border-left:0;border-right:0;border-top:0;
+  text-align:left;font-family:var(--ui);color:inherit}
+.mod:last-child{border-bottom:0}
+.mod.live{cursor:pointer}
+.mod.live:hover{background:var(--surface-2)}
+.mod .i{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:500}
+.mod .t{font-size:15px;font-weight:500;line-height:1.3}
+.mod .t small{display:block;font-family:var(--serif);font-weight:400;
+  font-size:13.5px;color:var(--ink-2);margin-top:3px;line-height:1.45}
+.mod .w{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);white-space:nowrap}
+
+/* checklist */
+.check{display:flex;gap:11px;align-items:flex-start;background:var(--surface);
+  border:1px solid var(--line);border-radius:10px;padding:13px 15px;margin:0 0 8px;
+  cursor:pointer}
+.check:hover{border-color:var(--accent)}
+.check input{margin:3px 0 0;width:17px;height:17px;flex:0 0 auto;
+  accent-color:var(--accent);cursor:pointer}
+.check .body{flex:1;min-width:0}
+.check .body b{display:block;font-size:14.5px;font-weight:600;margin-bottom:2px}
+.check .body span{font-family:var(--serif);font-size:14.5px;color:var(--ink-2);
+  line-height:1.5;display:block}
+.check.done .body b,.check.done .body span{opacity:.5;text-decoration:line-through}
+
+.progress{display:flex;align-items:center;gap:12px;margin:0 0 20px}
+.bar{flex:1;height:6px;border-radius:99px;background:var(--surface-2);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);border-radius:99px;
+  transition:width .25s ease;width:0}
+.progress .pct{font-family:var(--mono);font-size:12px;color:var(--ink-3);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.btnrow{display:flex;flex-wrap:wrap;gap:9px;margin:22px 0 0}
+.btn{background:var(--accent);color:#fff;border:1px solid var(--accent);
+  border-radius:9px;padding:10px 16px;font-family:var(--ui);font-size:14.5px;
+  font-weight:600;cursor:pointer}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:var(--surface);color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--accent);filter:none}
+
+.srcs{font-family:var(--serif);font-size:14px;color:var(--ink-2);line-height:1.6}
+.srcs li{font-size:14px;margin-bottom:5px}
+
+.foot{margin-top:52px;padding-top:22px;border-top:1px solid var(--line);
+  font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.03em}
+
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:5px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ---------- responsive ---------- */
+@media (max-width:860px){
+  .shell{grid-template-columns:1fr}
+  .topbar{display:flex}
+  .sidebar{position:fixed;inset:0;height:auto;z-index:30;border-right:0;
+    padding:16px;padding-top:calc(16px + env(safe-area-inset-top,0px));
+    overflow-y:auto;background:var(--bg)}
+  .sidebar[hidden]{display:none}
+  .main{padding:26px 16px 80px}
+  .nav button{padding:11px 10px;font-size:15.5px}
+}
+</style>
+
+<div class="topbar">
+  <b id="tbTitle">Стратегия за 20 недель</b>
+  <button class="iconbtn" id="menuBtn" aria-expanded="false">Меню</button>
+</div>
+
+<div class="shell">
+  <aside class="sidebar" id="sidebar">
+    <button class="brand" data-go="home">
+      <b>Стратегия за 20 недель</b>
+      <span>Курс маркетинга · старт 28.09</span>
+    </button>
+
+    <div class="navgroup">
+      <h4>Начало</h4>
+      <nav class="nav">
+        <button data-go="home"><span class="num">·</span>Обзор</button>
+        <button data-go="questions"><span class="num">!</span>Вопросы на первую неделю</button>
+        <button data-go="legal"><span class="num">!</span>Техника безопасности</button>
+        <button data-go="rules"><span class="num">·</span>Правила курса</button>
+        <button data-go="baseline"><span class="num">·</span>Нулевой замер</button>
+        <button data-go="agreement"><span class="num">·</span>Как подаётся информация</button>
+      </nav>
+    </div>
+
+    <div class="navgroup">
+      <h4>Программа</h4>
+      <nav class="nav">
+        <button data-go="program"><span class="num">·</span>Все модули</button>
+        <button data-go="m1"><span class="num">01</span>Карта решения — урок</button>
+        <button data-go="m1hw"><span class="num">01</span>Карта решения — задание</button>
+      </nav>
+    </div>
+
+    <div class="navgroup">
+      <h4>Библиотека</h4>
+      <nav class="nav">
+        <button data-go="library"><span class="num">·</span>Приёмы и форматы</button>
+      </nav>
+    </div>
+
+    <div class="navgroup">
+      <h4>Вид</h4>
+      <nav class="nav">
+        <button id="themeBtn"><span class="num">◐</span>Тёмная / светлая</button>
+      </nav>
+    </div>
+  </aside>
+
+  <main class="main">
+
+  <!-- ================= HOME ================= -->
+  <section class="page" id="home">
+    <p class="eyebrow">Персональная программа</p>
+    <h1>Маркетинг: от постов к стратегии</h1>
+    <p class="lede">Двадцать недель, час в день. Ниша — электроустановочные изделия
+    и системы обогрева. Аудитории: дизайнеры интерьера, студии, электрики,
+    конечные клиенты.</p>
+
+    <div class="grid">
+      <div class="tile"><span class="k">Старт</span><span class="v">28.09</span>
+        <span class="s">Понедельник</span></div>
+      <div class="tile"><span class="k">Длительность</span><span class="v">20 недель</span>
+        <span class="s">10 модулей по две</span></div>
+      <div class="tile"><span class="k">Нагрузка</span><span class="v">~1 ч/день</span>
+        <span class="s">Минимум в плохую неделю — 15 минут</span></div>
+    </div>
+
+    <h2>Зачем это всё</h2>
+    <p>Там, где ты работала раньше, кто видит контент — тот и платит. В розетках
+    и тёплых полах не так: бренд называет дизайнер, ставит электрик, а платит
+    клиент, который в выборе не участвовал. Поэтому и нет ощущения, что влияешь
+    на продажи — ты меряешь охваты, а решение принимается в переписке дизайнера
+    с заказчиком.</p>
+    <p>Программа собрана вокруг этого. К концу у тебя не конспекты, а готовая
+    маркетинговая стратегия для компании — документ, который защищают перед
+    руководством. Каждый модуль добавляет в него раздел.</p>
+
+    <div class="note">
+      <span class="lbl">Главное перед стартом</span>
+      <p><strong>Зафиксируй стартовые цифры компании в первые дни работы.</strong>
+      Подписчики, охваты, трафик, заявки в месяц, продажи с диджитала — скриншотами,
+      с датой. Твоя цель — рост на рынке, а значит главный актив отсюда — кейс
+      с цифрами. Кейс существует только если есть «до», и задним числом
+      его не восстановить.</p>
+    </div>
+
+    <h2>Что прочитать до понедельника</h2>
+    <div class="mods">
+      <button class="mod live" data-go="questions">
+        <span class="i">1</span>
+        <span class="t">Вопросы на первую неделю
+          <small>Что спросить на новой работе, пока можно спрашивать что угодно. Приоритет выше первого модуля.</small></span>
+        <span class="w">15 мин</span>
+      </button>
+      <button class="mod live" data-go="legal">
+        <span class="i">2</span>
+        <span class="t">Техника безопасности по закону
+          <small>Что можно и нельзя публиковать. До первой публикации.</small></span>
+        <span class="w">10 мин</span>
+      </button>
+      <button class="mod live" data-go="rules">
+        <span class="i">3</span>
+        <span class="t">Правила курса
+          <small>Две минуты. Там правило про 15-минутную неделю — оно определит, дойдёшь ли ты до конца.</small></span>
+        <span class="w">2 мин</span>
+      </button>
+    </div>
+
+    <h2>Как идёт работа</h2>
+    <p>Читаешь урок → делаешь задание → присылаешь в чат → я проверяю по критериям
+    приёмки и даю разбор. Либо зачёт и следующий модуль, либо конкретный список
+    переделок. «Хорошая работа» без разбора — не мой жанр.</p>
+
+    <div class="tablewrap">
+      <table>
+        <tr><td class="n">Будни 19:00</td><td>Напоминание: какой следующий шаг сегодня</td></tr>
+        <tr><td class="n">Вс 18:00</td><td>Разбор недели, сводка новостей отрасли, пополнение библиотеки</td></tr>
+      </table>
+    </div>
+    <p>Время московское. Задания сдаются в чат — туда же приходят напоминания.</p>
+
+    <div class="btnrow">
+      <button class="btn" data-go="m1">Открыть модуль 1</button>
+      <button class="btn ghost" data-go="program">Вся программа</button>
+    </div>
+
+    <p class="foot">Отметки о выполнении хранятся в этом браузере и не переносятся
+    на другие устройства. Настоящий учёт прогресса — в нашем чате.</p>
+  </section>
+
+  <!-- ================= QUESTIONS ================= -->
+  <section class="page" id="questions" hidden>
+    <p class="eyebrow">Перед стартом</p>
+    <h1>Вопросы на первую неделю</h1>
+    <p class="lede">Окно, когда можно спрашивать что угодно, открыто примерно две
+    недели. Потом те же вопросы будут выглядеть как «она до сих пор не разобралась».
+    Не экономь его.</p>
+    <p>Не задавай всё списком за раз — растяни на разговоры, по три-пять вопросов.
+    Записывай ответы: половина из них станет данными для модулей 1–4.</p>
+
+    <h2>Сделать самой в первые дни</h2>
+    <p>Приоритет выше всех вопросов. Это твой «до» для будущего кейса —
+    и для разговора о деньгах, и для выхода на рынок.</p>
+    <div id="hw0"></div>
+
+    <h2>Деньги — к руководителю или коммерческому</h2>
+    <ul>
+      <li>Из чего складывается выручка по каналам: розница, дилеры, маркетплейсы, объекты? Какие доли?</li>
+      <li>Какая средняя сумма сделки в каждом канале?</li>
+      <li>На чём компания зарабатывает больше всего — не что больше продаётся, а что приносит маржу. Это часто разные вещи.</li>
+      <li>Считали ли, сколько стоит привлечение одного клиента?</li>
+      <li>Какой план продаж на квартал и год? Какой вклад ждут от маркетинга в цифрах?</li>
+    </ul>
+    <div class="note">
+      <span class="lbl">Задать обязательно</span>
+      <p><em>«Что вы будете считать успехом моей работы через три месяца и через
+      год? В каких конкретно цифрах?»</em></p>
+      <p>Если внятного ответа нет — это важнейшая находка: критерий оценки придумают
+      задним числом, и лучше предложить его самой, чем получить чужой. Если ответ
+      есть — ты с первого дня знаешь, за что тебя будут судить.</p>
+    </div>
+
+    <h2>Как считают — к аналитике и продажам</h2>
+    <ul>
+      <li>Что именно считается лидом и где он фиксируется?</li>
+      <li>Есть ли CRM? Что в неё вносят, кто и насколько дисциплинированно?</li>
+      <li>Как понимают, откуда пришёл клиент? Есть ли сквозная аналитика?</li>
+      <li>Что происходит с заявкой после поступления: кто берёт, за какое время, по какому скрипту?</li>
+      <li>Какая конверсия из заявки в сделку?</li>
+    </ul>
+    <p>Если на последний вопрос не отвечают — находка того же класса. Нельзя
+    требовать от тебя продаж, не считая, что происходит с твоими лидами после
+    передачи. Зафиксируй это спокойно и без обвинений.</p>
+
+    <h2>Рынок и клиенты — к отделу продаж</h2>
+    <p>Самый недооценённый источник в компании. Час с менеджером заменяет пять
+    холодных интервью и прямо питает задание первого модуля.</p>
+    <ul>
+      <li>Три последние крупные сделки — как пришли, кто принимал решение?</li>
+      <li>Что спрашивают чаще всего перед покупкой?</li>
+      <li>Из-за чего чаще всего срываются сделки?</li>
+      <li>Кто основные конкуренты и чем они нас бьют?</li>
+      <li>С какими дизайнерами и студиями уже работаем, на каких условиях?</li>
+      <li>Есть ли программа для электриков и монтажников? Работает ли она?</li>
+      <li>Какими словами клиенты сами описывают свою задачу?</li>
+    </ul>
+
+    <h2>История и ограничения — к руководителю</h2>
+    <ul>
+      <li>Что уже пробовали в маркетинге? Что сработало, что нет и почему?</li>
+      <li>Какой бюджет и на что тратится сейчас?</li>
+      <li>Кто согласует публикации и сколько это занимает?</li>
+      <li>Есть ли ограничения от юристов или производителя по формулировкам?</li>
+      <li>Были ли претензии или штрафы, связанные с рекламой?</li>
+      <li>Что случилось с предыдущим человеком на этой позиции?</li>
+    </ul>
+    <p>Последний вопрос неудобный, но задать стоит — аккуратно и без подтекста.
+    Ответ обычно объясняет, какие ожидания оказались невыполнимыми.</p>
+
+    <div class="btnrow"><button class="btn ghost" data-go="legal">Дальше: техника безопасности</button></div>
+  </section>
+
+  <!-- ================= LEGAL ================= -->
+  <section class="page" id="legal" hidden>
+    <p class="eyebrow">Перед стартом</p>
+    <h1>Что можно и нельзя публиковать</h1>
+    <p class="lede">Короткий чек-лист на первый месяц для Telegram, ВКонтакте,
+    Instagram и вертикальных видео. Полный разбор — в модуле 7.</p>
+
+    <p>Проверено 24.09.2026. Пометки: <span class="mark y">✓</span> проверено
+    по источникам · <span class="mark q">?</span> требует уточнения ·
+    <span class="mark t">~</span> моя оценка.</p>
+
+    <div class="note warn">
+      <span class="lbl">Это не юридическая консультация</span>
+      <p>Здесь ориентиры и логика регулирования. Всё, что несёт риск штрафа,
+      согласуется с юристом компании до публикации. Instagram принадлежит Meta,
+      признанной в РФ экстремистской организацией и запрещённой — сноска
+      обязательна при каждом публичном упоминании.</p>
+    </div>
+
+    <h2>Instagram: главное ограничение</h2>
+    <p><span class="mark y">✓</span> С 1 сентября 2025 действует запрет
+    на распространение рекламы на платформах запрещённых организаций —
+    Instagram, Facebook, X. Основание: Федеральный закон № 72-ФЗ.</p>
+    <p><span class="mark y">✓</span> Штрафы по ст. 14.3 КоАП: физлица — до 2 500 ₽,
+    <strong>должностные лица — до 20 000 ₽</strong>, юрлица — до 500 000 ₽.
+    Оштрафовать могут и рекламодателя, и владельца аккаунта.</p>
+    <p>Обрати внимание на строчку «должностные лица». Это про тебя.</p>
+
+    <h3>Запрещено</h3>
+    <ul>
+      <li>Таргетированная реклама на платформе.</li>
+      <li>Реклама у блогеров и в публичных аккаунтах.</li>
+      <li>Размещение рекламы третьих лиц — партнёров, дилеров — в аккаунте компании.</li>
+    </ul>
+
+    <h3>Разрешено</h3>
+    <p><span class="mark y">✓</span> По позиции ФАС не является рекламой информация
+    о товарах компании, размещённая на её собственных ресурсах, если она
+    предназначена для информирования о деятельности, ассортименте, условиях
+    покупки, ценах и правилах пользования. ФАС и РКН сходятся в том, что ведение
+    аккаунта и публикация новостей бренда остаются разрешёнными.</p>
+    <p><span class="mark y">✓</span> Критерий разграничения: рекламой признаётся
+    информация, которая выделяет конкретный объект среди однородных товаров
+    и формирует к нему интерес для продвижения. Ключевая разница —
+    <strong>цель побудить к покупке</strong>.</p>
+
+    <div class="tablewrap">
+      <table>
+        <tr><th>Скорее информирование</th><th>Скорее реклама</th></tr>
+        <tr><td>Как выбрать сечение кабеля под тёплый пол</td><td>«Успей купить со скидкой 30%»</td></tr>
+        <tr><td>Обзор линейки: чем модели отличаются</td><td>«Лучшие розетки на рынке»</td></tr>
+        <tr><td>Кейс объекта с нашей продукцией</td><td>Реклама дилера в нашем аккаунте</td></tr>
+        <tr><td>Инструкция по монтажу</td><td>Промокод с призывом перейти и оформить</td></tr>
+      </table>
+    </div>
+    <p><span class="mark q">?</span> Граница размытая, практика применения нового
+    запрета ещё формируется. Спорные публикации — через юриста. Не полагайся
+    на эту таблицу как на последнюю инстанцию.</p>
+
+    <h2>Маркировка рекламы: Telegram, VK, сайт</h2>
+    <p><span class="mark y">✓</span> С сентября 2022 вся интернет-реклама
+    маркируется, данные передаются в ЕРИР — реестр Роскомнадзора, к которому
+    имеют доступ также ФАС и ФНС.</p>
+    <p>Три обязательных элемента: пометка «Реклама», токен <code>erid</code>,
+    сведения о рекламодателе (наименование или ИНН).</p>
+    <p><span class="mark y">✓</span> Токен получают в ОРД и размещают в креативе
+    <strong>до или в момент старта показа</strong>, не задним числом. Работают
+    семь ОРД, включая Яндекс ОРД, ОРД VK и Ozon ОРД.</p>
+    <p><span class="mark y">✓</span> Штраф за один немаркированный креатив —
+    <strong>100 000 – 500 000 ₽</strong>. За опоздание с отчётностью в ЕРИР
+    для физлиц — 10 000–30 000 ₽. С апреля 2025 введены отчисления 3%
+    от квартального дохода за распространение интернет-рекламы.</p>
+    <p><span class="mark t">~</span> Выясни в первую неделю: с каким ОРД работает
+    компания, кто получает токены и кто сдаёт отчётность. Если ответа нет ни
+    у кого — это твоя находка и первый управленческий результат.</p>
+
+    <h2>Что нельзя обещать про технический товар</h2>
+    <p><span class="mark y">✓</span> Реклама должна быть добросовестной
+    и достоверной (ст. 5 ФЗ «О рекламе» № 38-ФЗ). Рекламодатель отвечает
+    за достоверность сведений и о своём товаре, и о товарах конкурентов, если
+    упоминает их. Запрещены некорректные сравнения. Электрооборудование
+    в большинстве видов подлежит обязательной сертификации: сертификат ТР ТС
+    или декларация о соответствии.</p>
+
+    <h3>Красные флаги в тексте поста</h3>
+    <ul>
+      <li>Превосходная степень без доказательств: «лучший», «самый надёжный», «№1 на рынке».</li>
+      <li>Числовые заявления без документа: срок службы, класс защиты, мощность, пожаробезопасность.</li>
+      <li>Сравнение с конкурентом по названию — самый быстрый способ получить жалобу в ФАС от него же.</li>
+      <li>Обещание результата: «не перегреется», «прослужит 50 лет».</li>
+    </ul>
+    <p><span class="mark t">~</span> Рабочее правило: каждая цифра в посте должна
+    иметь бумажный источник — паспорт изделия, сертификат, протокол испытаний.
+    Нет документа — нет цифры в посте.</p>
+
+    <h2>Спорные зоны: сюда без юриста не ходить</h2>
+    <p><span class="mark q">?</span> Практика не устоялась, однозначного ответа
+    у меня нет:</p>
+    <ul>
+      <li>Розыгрыши и giveaway в Instagram.</li>
+      <li>Коллаборации с дизайнерами: где заканчивается совместный проект и начинается реклама.</li>
+      <li>Репосты пользовательского контента с упоминанием бренда.</li>
+      <li>Перенос аудитории из Instagram в Telegram: как анонсировать.</li>
+      <li>Кто признаётся рекламодателем, если публикацию делает подрядчик.</li>
+    </ul>
+
+    <h2>Вопросы юристу компании</h2>
+    <ol>
+      <li>Кто отвечает за маркировку рекламы и с каким ОРД мы работаем?</li>
+      <li>Есть ли утверждённый список формулировок, которые нельзя использовать про нашу продукцию?</li>
+      <li>Какой регламент согласования публикаций и кто подписывает риск?</li>
+      <li>Были ли претензии ФАС или Роскомнадзора? По какому поводу?</li>
+      <li>Какая у нас позиция по Instagram — ведём как информационный канал или сворачиваем?</li>
+    </ol>
+    <p><span class="mark t">~</span> Пятый вопрос задай обязательно и зафиксируй
+    ответ письменно. Если решение принято не тобой, оно и не должно лежать на тебе.</p>
+
+    <h2>Источники</h2>
+    <ul class="srcs">
+      <li><a href="https://www.forbes.ru/svoi-biznes/544859-zapret-reklamy-v-instagram-s-1-sentabra-cto-mozno-i-nel-za-publikovat">Forbes: запрет рекламы в Instagram с 1 сентября</a></li>
+      <li><a href="https://mosdigitals.ru/blog/zapret-reklamy-v-instagram-s-1-sentyabrya-2025-goda-razbor-yurista">Moscow Digital School: разбор юриста</a></li>
+      <li><a href="https://elama.ru/blog/zapret-reklamy-v-instagram-s-1-sentyabrya-2025-chto-izmenitsya-i-kak-rabotat-po-novomu-zakonu/">eLama: как работать по новому закону</a></li>
+      <li><a href="https://callibri.ru/blog/chto-schitaetsya-reklamoy-v-instagram">Callibri: что считается рекламой в Instagram</a></li>
+      <li><a href="https://partner.market.yandex.ru/chtojournal/kak-markirovat-reklamu/">Яндекс: как маркировать рекламу в 2026</a></li>
+      <li><a href="https://www.consultant.ru/document/cons_doc_LAW_34661/2d50fc1c4013ea9ab20b8b2666c1650b1dc4c982/">КонсультантПлюс: ст. 14.3 КоАП РФ</a></li>
+      <li><a href="https://rulaws.ru/laws/Federalnyy-zakon-ot-13.03.2006-N-38-FZ/Statya-5/">ФЗ «О рекламе» № 38-ФЗ, ст. 5</a></li>
+    </ul>
+    <p><span class="mark q">?</span> Все ссылки, кроме КонсультантПлюс и текста
+    закона, — вторичные источники: отраслевые блоги и медиа. Первоисточники
+    я из своего окружения открыть не смог. Перед тем как опираться на конкретные
+    цифры штрафов в разговоре с руководством, проверь их по КонсультантПлюс
+    или с юристом.</p>
+  </section>
+
+  <!-- ================= RULES ================= -->
+  <section class="page" id="rules" hidden>
+    <p class="eyebrow">Перед стартом</p>
+    <h1>Правила курса</h1>
+
+    <h2>Минимальная версия недели</h2>
+    <p>Нормальная неделя — пять часов. Но недели будут разные, особенно первые
+    месяцы на новой работе. Поэтому: <strong>если неделя провалилась, действует
+    минимальная версия — 15 минут.</strong></p>
+    <p>Что считается выполнением минимума:</p>
+    <ul>
+      <li>прочитать один раздел урока, или</li>
+      <li>задать один вопрос коллеге из списка первой недели, или</li>
+      <li>записать одно наблюдение в библиотеку, или</li>
+      <li>написать мне одну строчку: где застряла.</li>
+    </ul>
+    <p>Всё. Пятнадцать минут — и неделя засчитана.</p>
+
+    <h2>Почему это правило важнее самого курса</h2>
+    <p>Обучение ломается не от сложности материала. Оно ломается так: человек
+    пропускает неделю, чувствует себя должником, начинает избегать напоминаний,
+    потом стыдно возвращаться, потом проще бросить. Провал случается не в момент
+    пропуска, а в момент, когда пропуск превращается в долг.</p>
+    <p>Поэтому долга здесь нет. Сорванная неделя не копится и не переносится.</p>
+
+    <h2>Что действительно нельзя</h2>
+    <p>Молча исчезнуть. Если не идёт — напиши, что именно: нет времени, непонятно
+    задание, потеряла интерес, задание кажется бессмысленным. Последнее —
+    нормальная причина и повод переделать задание, а не тебя.</p>
+
+    <h2>Как я даю обратную связь</h2>
+    <p>Прямо, по критериям приёмки, а не по ощущению. «Хорошая работа» без разбора
+    ты от меня не услышишь — это не помогает расти. Но разбор всегда про работу,
+    а не про тебя, и всегда с указанием, что конкретно переделать. Задание,
+    возвращённое без инструкции, что с ним делать — моя ошибка, а не твоя.
+    Требуй конкретики.</p>
+
+    <h2>Темп</h2>
+    <div class="tablewrap">
+      <table>
+        <tr><td class="n">Будни 19:00</td><td>Напоминание: какой следующий шаг</td></tr>
+        <tr><td class="n">Вс 18:00</td><td>Разбор недели и сводка отрасли</td></tr>
+      </table>
+    </div>
+    <p>Сдвинуть дедлайн модуля можно всегда. Просто скажи.</p>
+  </section>
+
+  <!-- ================= BASELINE ================= -->
+  <section class="page" id="baseline" hidden>
+    <p class="eyebrow">Перед стартом · 24 сентября 2026</p>
+    <h1>Нулевой замер</h1>
+    <p class="lede">Снимок «до». Не редактируется задним числом — в этом весь смысл.</p>
+
+    <div class="grid">
+      <div class="tile"><span class="k">Оклад</span><span class="v">130 000 ₽</span>
+        <span class="s">На руки, новая позиция</span></div>
+      <div class="tile"><span class="k">Зона ответственности</span><span class="v">Стратегия + SMM</span>
+        <span class="s">Плюс продажи, лиды и их подсчёт</span></div>
+      <div class="tile"><span class="k">Цель роста</span><span class="v">Рынок</span>
+        <span class="s">Не только внутри компании</span></div>
+    </div>
+
+    <h2>Что умею сейчас</h2>
+    <p>База SMM: контент, ведение соцсетей, охваты и вовлечение. Опыт в двух
+    нишах — путешествия и бьюти. Обе с прямыми продажами конечному потребителю
+    и коротким путём до покупки.</p>
+
+    <h2>Чего не хватает — по собственной оценке</h2>
+    <ol>
+      <li><strong>Глубокой аналитики.</strong> Что такое юнит-экономика — не знаю. Мышление охватами, а не деньгами.</li>
+      <li><strong>Аргументации.</strong> Не могу доказать, что идея корректная. Могу засомневаться в собственном предложении и не знаю, чем его защитить.</li>
+      <li><strong>Обоснования решений.</strong> Рубрики, форматы и каналы выбираются по опыту и интуиции, а не по расчёту. Отсюда ощущение, что не влияю на продажи.</li>
+    </ol>
+
+    <h2>Чем всё это закончится</h2>
+    <p>Через двадцать недель возвращаемся сюда и отвечаем: могу ли я посчитать
+    юнит-экономику своего направления; могу ли защитить любое своё предложение
+    цифрами; есть ли у меня кейс с зафиксированными «до» и «после»; изменился
+    ли чек и на каком основании я его запросила.</p>
+  </section>
+
+  <!-- ================= AGREEMENT ================= -->
+  <section class="page" id="agreement" hidden>
+    <p class="eyebrow">Перед стартом</p>
+    <h1>Как подаётся информация</h1>
+    <p class="lede">Рабочее соглашение. Действует на все материалы курса, сводки
+    и разборы.</p>
+
+    <h2>Достоверность</h2>
+    <p><strong>Ничего не выдумываю.</strong> Если не знаю — пишу «не знаю» или
+    «надо проверить». Правдоподобная выдумка опаснее честного пробела:
+    на её основе принимаются рабочие решения.</p>
+    <p>Каждое утверждение помечается: <span class="mark y">✓</span> проверено,
+    источник указан · <span class="mark q">?</span> требует проверки
+    на актуальность · <span class="mark t">~</span> моя оценка или гипотеза,
+    можно спорить.</p>
+    <p>Цифры, даты, названия законов, условия сервисов и цены — всегда
+    с источником и датой проверки. Без этого не приводятся вообще.</p>
+
+    <h2>Чего я не могу проверить</h2>
+    <ul>
+      <li><strong>Граница знаний.</strong> Моя база знаний заканчивается маем 2026 года. Всё, что позже, беру веб-поиском и перепроверяю.</li>
+      <li><strong>Доступ к сайтам.</strong> Открытие конкретных страниц из моего окружения ограничено. Поиск работает, чтение первоисточников — не всегда. Буду прямо говорить, где ссылку надо открыть тебе самой.</li>
+      <li><strong>Соцсети.</strong> Ленты Instagram и TikTok я не вижу. Всё про визуальные тренды — только с твоих материалов.</li>
+      <li><strong>Юридические вопросы.</strong> Даю ориентиры и объясняю логику регулирования, но не заменяю юриста.</li>
+    </ul>
+
+    <h2>Тон и язык</h2>
+    <p>Говорю с позиции практикующего маркетолога, который следит за современными
+    инструментами и знает, что из них работает, а что хайп.</p>
+    <p>Термины использую те, которые тебе нужно знать — без них не получится
+    говорить с коллегами и защищать решения. Но каждый новый термин объясняю
+    при первом появлении, на человеческом языке и с примером из твоей ниши.</p>
+    <p>Чего не будет: канцелярита ради солидности, английских калек там, где есть
+    нормальное русское слово, и упрощения до уровня «маркетинг — это когда
+    продают». Если формулировка непонятна — говори, перепишу. Непонятый материал
+    это мой промах, а не твой.</p>
+
+    <h2>Английский</h2>
+    <p>Сквозной трек, не отдельный модуль. Каждую неделю — один материал
+    на английском по теме модуля и разбор терминов из него. Цель не «выучить
+    английский», а научиться читать профессиональные тексты по своей теме
+    и владеть рабочей терминологией. Это же первый шаг к международному рынку.</p>
+  </section>
+
+  <!-- ================= PROGRAM ================= -->
+  <section class="page" id="program" hidden>
+    <p class="eyebrow">Программа</p>
+    <h1>Десять модулей</h1>
+    <p class="lede">Модули выкладываются по мере прохождения — чтобы содержание
+    учитывало то, что выяснится раньше. Серый значит «ещё не написан»,
+    а не «забыт».</p>
+
+    <div class="mods">
+      <button class="mod live" data-go="m1">
+        <span class="i">01</span>
+        <span class="t">Карта решения: кто на самом деле покупает
+          <small>Роли в сделке, JTBD каждой, метод интервью. Перестаёшь придумывать аудиторию</small></span>
+        <span class="w">1–2</span>
+      </button>
+      <div class="mod"><span class="i">02</span>
+        <span class="t">Позиционирование и ценность
+          <small>Разбор конкурентов, точки отличия, ценностное предложение под каждую роль</small></span>
+        <span class="w">3–4</span></div>
+      <div class="mod"><span class="i">03</span>
+        <span class="t">Юнит-экономика и метрики
+          <small>CAC, LTV, ДРР, воронка. Как считать вклад маркетинга, когда продажа уходит в офлайн и к дилерам</small></span>
+        <span class="w">5–6</span></div>
+      <div class="mod"><span class="i">04</span>
+        <span class="t">Стратегия: от бизнес-цели к каналам
+          <small>Как пишется стратегия. Почему этот канал, а не тот — с обоснованием</small></span>
+        <span class="w">7–8</span></div>
+      <div class="mod"><span class="i">05</span>
+        <span class="t">Дизайнеры, студии, электрики
+          <small>Трейд- и партнёрский маркетинг: лояльность, обучение, спецификация, офлайн</small></span>
+        <span class="w">9–10</span></div>
+      <div class="mod"><span class="i">06</span>
+        <span class="t">Контент под воронку
+          <small>Контент-система с гипотезами и метриками вместо рубрикатора</small></span>
+        <span class="w">11–12</span></div>
+      <div class="mod"><span class="i">07</span>
+        <span class="t">Право в маркетинге
+          <small>Соцсети, маркировка, заявления о характеристиках техники, персональные данные</small></span>
+        <span class="w">13–14</span></div>
+      <div class="mod"><span class="i">08</span>
+        <span class="t">ИИ: ресёрч, аналитика, тренды
+          <small>Автоматизация исследований, система обнаружения трендов, разбор данных. И где ИИ врёт</small></span>
+        <span class="w">15–16</span></div>
+      <div class="mod"><span class="i">09</span>
+        <span class="t">ИИ: визуал и продакшн
+          <small>Промптинг всерьёз, предметка без съёмки, продукт в интерьере, консистентность серии</small></span>
+        <span class="w">17–18</span></div>
+      <div class="mod"><span class="i">10</span>
+        <span class="t">Личный бренд, портфолио и рост чека
+          <small>Упаковка кейса, публичное портфолио, разговор о деньгах</small></span>
+        <span class="w">19–20</span></div>
+    </div>
+
+    <p>Плюс два сквозных трека с первой недели: английский в маркетинге
+    и практика нейросетей по теме каждого модуля.</p>
+
+    <h2>Про модуль 7 — право</h2>
+    <p>Ниша регулируемая вдвойне: электротехника (сертификация, заявления
+    о мощности и пожаробезопасности) и реклама в соцсетях, где законодательство
+    менялось много раз.</p>
+    <p>Скажу прямо: я объясняю, где проходит граница и как работать, не переходя
+    её. Схемы обхода закона разбирать не буду — не из занудства, а потому что
+    автором публикации числишься ты, риск ложится на тебя лично, а выгоду
+    получает компания. Обмен невыгодный. Знать границу и уметь поставить юристу
+    точный вопрос — вот это сильная позиция.</p>
+
+    <h2>Про модуль 10 — рост чека</h2>
+    <p>Цель роста — рынок, а не только текущая компания. Значит нужны упакованный
+    кейс с цифрами, публичное портфолио и умение назвать свою цену и обосновать
+    её. Фиксация кейса начинается не на девятнадцатой неделе, а в первый рабочий
+    день.</p>
+  </section>
+
+  <!-- ================= M1 LESSON ================= -->
+  <section class="page" id="m1" hidden>
+    <p class="eyebrow">Модуль 1 · недели 1–2 · урок</p>
+    <h1>Карта решения: кто на самом деле покупает розетку</h1>
+    <p class="lede">Цель модуля: перестать угадывать аудиторию и построить карту
+    людей, которые реально влияют на сделку.</p>
+
+    <h2>1.1 Почему здесь не работает то, что работало в бьюти</h2>
+    <p>В бьюти и тревеле путь короткий: человек увидел контент, захотел, купил.
+    Кто смотрит — тот и платит, тот и выбирает. Один человек, одно решение.</p>
+    <p>В электроустановке и обогреве решение размазано. Типовые сценарии:</p>
+
+    <div class="card">
+      <h3>А. Ремонт через дизайн-студию</h3>
+      <p>Бренд называет дизайнер. Клиент утверждает по картинке в визуализации,
+      не вникая в марку. Закупает прораб или комплектовщик студии. Ставит электрик.
+      Итог: маркетинг, направленный на конечного клиента, до решения не долетает.</p>
+    </div>
+    <div class="card">
+      <h3>Б. Частный ремонт с бригадой</h3>
+      <p>Выбирает прораб или электрик, клиент соглашается — «он профессионал,
+      ему виднее». Критерий выбора не красота, а удобство монтажа и наличие
+      в ближайшем магазине.</p>
+    </div>
+    <div class="card">
+      <h3>В. Клиент выбирает сам</h3>
+      <p>Гуглит, смотрит маркетплейсы, идёт в строительный гипермаркет. Здесь
+      работает классика: отзывы, карточка товара, визуал, цена.</p>
+    </div>
+    <div class="card">
+      <h3>Г. Объект, застройщик, коммерция</h3>
+      <p>Тендер, сметы, сертификаты, объёмы. Соцсети влияют минимально, работает
+      репутация и отдел продаж.</p>
+    </div>
+
+    <div class="note">
+      <span class="lbl">Что из этого следует</span>
+      <p>«Целевая аудитория» в такой категории — не один портрет. Это набор ролей,
+      у каждой свой критерий выбора и свой страх. Сегментация по полу и возрасту
+      здесь бесполезна: дизайнер тридцати лет и дизайнер пятидесяти выбирают
+      по одному принципу, а дизайнер и электрик — по противоположным.</p>
+    </div>
+
+    <h2>1.2 Роли в сделке</h2>
+    <p>Разбирай сделку по ролям, а не по людям. Один человек может занимать
+    несколько ролей, и наоборот.</p>
+    <div class="tablewrap">
+      <table>
+        <tr><th>Роль</th><th>Что делает</th><th>Кто это в нише</th></tr>
+        <tr><td>Инициатор</td><td>Запускает процесс</td><td>Клиент, затеявший ремонт</td></tr>
+        <tr><td><strong>Спецификатор</strong></td><td>Называет конкретный бренд</td><td>Дизайнер, электрик, прораб</td></tr>
+        <tr><td>Утверждающий</td><td>Даёт добро и платит</td><td>Клиент, собственник объекта</td></tr>
+        <tr><td>Закупщик</td><td>Оформляет покупку</td><td>Комплектовщик студии, прораб</td></tr>
+        <tr><td>Установщик</td><td>Работает руками</td><td>Электрик, монтажник</td></tr>
+        <tr><td>Блокатор</td><td>Может зарубить</td><td>Тот, кто скажет «дорого» или «нет в наличии»</td></tr>
+      </table>
+    </div>
+    <p><strong>Главный вывод модуля:</strong> ключевая роль здесь — спецификатор.
+    Тот, кто произносит название бренда вслух. Именно на него в первую очередь
+    работает маркетинг, и называется это B2B2C, или трейд-маркетинг. Инструменты
+    разберём в модуле 5.</p>
+    <p>Установщик при этом — скрытый блокатор. Электрик, которому неудобно ставить
+    твою розетку, будет годами отговаривать клиентов, и никакая реклама
+    это не перебьёт.</p>
+
+    <h2>1.3 JTBD: какую работу нанимают выполнять твой продукт</h2>
+    <p>Jobs To Be Done — принцип: люди не покупают продукт, они «нанимают» его,
+    чтобы решить свою задачу. Задача редко совпадает с характеристиками товара.</p>
+
+    <div class="card">
+      <h3>Дизайнер интерьера</h3>
+      <p>Нанимает розетку не для красоты. Настоящая работа: сдать проект
+      без косяков, выглядеть профессионалом, не получить претензию, уложиться
+      в бюджет. Плюс заработать — партнёрская программа, скидка.</p>
+      <p><em>Страхи:</em> не будет в наличии к сроку; цвет не совпадёт с рендером;
+      клиент найдёт дешевле и решит, что его обманули.</p>
+    </div>
+    <div class="card">
+      <h3>Электрик, монтажник</h3>
+      <p>Работа: поставить быстро, без переделок, не получить рекламацию.
+      Критерии: удобство клемм, качество пластика, предсказуемость, наличие
+      в местном магазине прямо сейчас. Эстетика не волнует совсем.</p>
+      <p><em>Страх:</em> брак и переделка за свой счёт с испорченной репутацией.</p>
+    </div>
+    <div class="card">
+      <h3>Конечный клиент</h3>
+      <p>Работа: чтобы дома было красиво, удобно и безопасно, и чтобы не пришлось
+      в это вникать. Критерии: вид, цена, «не сгорит», отзывы, понятная гарантия.</p>
+    </div>
+    <div class="card">
+      <h3>Дизайн-студия как бизнес</h3>
+      <p>Работа: маржа, скорость комплектации, надёжный поставщик, отсутствие
+      проблем. Студию интересует не товар, а поставщик, который не подведёт
+      по срокам.</p>
+    </div>
+    <p>Обрати внимание: у всех четверых «качество» означает разное. Если в твоём
+    исследовании у всех получилось «качество и цена» — исследование не доделано.</p>
+
+    <h2>1.4 Как это узнать, а не выдумать</h2>
+    <p><strong>Базовое правило.</strong> Не спрашивай про будущее и про мнения.
+    Спрашивай про последний реальный случай. Люди плохо предсказывают своё
+    поведение, но хорошо помнят, что делали.</p>
+    <p><em>Плохие вопросы:</em> «Вам важно качество?» — конечно важно, ответ
+    бесполезен. «Вы бы купили за 1500?» — гипотетика, врут не со зла.
+    «Что вам нравится в нашем бренде?» — наводящий, получишь комплименты.</p>
+
+    <h3>Каркас интервью на 20–25 минут</h3>
+    <ol>
+      <li>Расскажи про последний проект, где выбирали розетки. Что за объект?</li>
+      <li>Как именно происходил выбор — по шагам, с самого начала.</li>
+      <li>Кто ещё участвовал? Что говорили?</li>
+      <li>Какие варианты рассматривал и почему отпали?</li>
+      <li>Что в этом процессе бесит больше всего?</li>
+      <li>Был случай, когда пожалел о выборе? Что произошло?</li>
+      <li>Откуда вообще узнаёшь про новые бренды и новинки?</li>
+    </ol>
+    <p>Седьмой вопрос самый ценный: он показывает реальные каналы, а не те,
+    которые ты предполагаешь.</p>
+
+    <h3>Где брать респондентов</h3>
+    <ul>
+      <li><strong>Менеджеры отдела продаж своей компании.</strong> Самый быстрый источник: у них в голове сотни историй. Час с продажником заменяет пять холодных интервью.</li>
+      <li>Дилеры и партнёры компании.</li>
+      <li>Профильные чаты и сообщества дизайнеров.</li>
+      <li>Электрики на профи-площадках — многие говорят охотно.</li>
+      <li>Знакомые, которые недавно делали ремонт.</li>
+    </ul>
+    <p><strong>Как фиксировать.</strong> Записывай дословные цитаты, не пересказ.
+    «Клиенту важна надёжность» — твоя интерпретация, она бесполезна. «Я один раз
+    поставил дешёвые, через полгода вызвали переделывать за свои — больше
+    не рискую» — это данные.</p>
+
+    <h2>1.5 Отзывы вместо интервью, когда времени нет</h2>
+    <p>Где искать: карточки конкурентов на маркетплейсах, отзывы на Яндекс.Картах,
+    форумы электриков, комментарии под роликами конкурентов, обсуждения ремонта.</p>
+    <p>Что вытаскивать: каким словами люди называют продукт и проблему; боли,
+    встречающиеся больше трёх раз; за что ставят единицы и двойки; сравнения
+    «а вот у бренда X» — это готовая карта конкурентов.</p>
+    <p><strong>Как обработать быстро.</strong> Собери 100–200 отзывов в таблицу,
+    прогони через нейросеть на кластеризацию. Но проверь руками случайную выборку
+    из двадцати: модель сглаживает формулировки и достраивает то, чего в тексте
+    не было. Кластеры принимай, цитаты бери только из оригинала.</p>
+
+    <div class="note info">
+      <span class="lbl">Рабочий промпт</span>
+      <p>«Вот 150 отзывов на электроустановочные изделия. Сгруппируй их по темам
+      претензий и похвал. Для каждой группы: название темы, сколько отзывов,
+      три дословные цитаты из исходного текста без изменений. Не обобщай
+      и не переформулируй цитаты. Если тема встречается меньше трёх раз —
+      в отдельную группу „единичные“».</p>
+    </div>
+
+    <h2>Что должно остаться в голове</h2>
+    <ol>
+      <li>В этой категории продаёт не реклама покупателю, а рекомендация спецификатора.</li>
+      <li>Аудитория — это роли в сделке, а не демография.</li>
+      <li>У каждой роли своя работа, свои критерии и свой страх, и они не совпадают.</li>
+      <li>Данные берутся из разговоров и отзывов, а не из головы.</li>
+    </ol>
+
+    <div class="btnrow"><button class="btn" data-go="m1hw">Перейти к заданию</button></div>
+  </section>
+
+  <!-- ================= M1 HOMEWORK ================= -->
+  <section class="page" id="m1hw" hidden>
+    <p class="eyebrow">Модуль 1 · задание · две недели, ~10 часов</p>
+    <h1>Карта решения</h1>
+    <p class="lede">Результат — документ, который станет первым разделом твоей
+    стратегии. Сдавать в чат.</p>
+
+    <div class="progress">
+      <div class="bar"><i id="barFill"></i></div>
+      <span class="pct" id="barPct">0 / 5</span>
+    </div>
+
+    <div id="hw1"></div>
+
+    <h2>Критерии приёмки</h2>
+    <p>Проверяю по этому списку. Не сходится — возвращаю на доработку с указанием,
+    что именно.</p>
+    <ul>
+      <li>Есть дословные цитаты живых людей. Без них работа не принимается: пересказ своими словами не является данными.</li>
+      <li>Критерии выбора у разных ролей <strong>различаются</strong>. Если у всех вышло «качество и цена» — копай глубже.</li>
+      <li>Вывод в пятом задании опирается на конкретные данные, а не на «мне кажется».</li>
+      <li>Нет формулировок вроде «ЦА — женщины 25–45, средний доход». Это не сегментация и в этой категории вообще ни о чём.</li>
+      <li>Указаны источники: с кем говорила, где брала отзывы.</li>
+      <li>По части с нейросетью честно написано, что проверяла и что нашла.</li>
+    </ul>
+
+    <h2>Типичные провалы</h2>
+    <ul>
+      <li>Написать за людей то, что они, по твоему мнению, думают.</li>
+      <li>Превратить интервью в презентацию продукта. Ты слушаешь, а не продаёшь.</li>
+      <li>Собрать только позитивные отзывы. Единицы и двойки ценнее пятёрок.</li>
+      <li>Задавать вопросы списком в переписке. Ответят односложно, данных не будет.</li>
+      <li>Остановиться на первом слое: «важно качество». Задай следующий вопрос: «а как ты понимаешь, что качество плохое? по чему это видно?»</li>
+    </ul>
+
+    <h2>ИИ-практика модуля</h2>
+    <p>Кроме кластеризации отзывов попробуй ещё одно. Собери всё, что нашла,
+    отдай нейросети и попроси сыграть роль скептически настроенного дизайнера
+    интерьера, который выбирает поставщика. Задай ему свои выводы и попроси
+    разнести их в пух и прах.</p>
+    <p>Смысл не в том, чтобы получить истину — модель её не знает. Смысл в том,
+    чтобы увидеть слабые места аргументации до того, как их увидит руководитель.
+    В сдаче приложи три возражения, которые показались справедливыми, и что
+    ты с ними сделала.</p>
+
+    <div class="note">
+      <span class="lbl">Если застряла</span>
+      <p>Напиши, на каком именно задании и что не выходит. Не найти респондентов —
+      отдельная задача, решаем вместе, вариантов больше, чем кажется.</p>
+    </div>
+  </section>
+
+  <!-- ================= LIBRARY ================= -->
+  <section class="page" id="library" hidden>
+    <p class="eyebrow">Библиотека</p>
+    <h1>Приёмы и форматы</h1>
+    <p class="lede">Накопительная база. У каждой карточки есть статус проверки:
+    не пробовали → в работе → сработало или нет, с цифрами. Через полгода это
+    уже не библиотека идей, а личная база проверенных гипотез.</p>
+
+    <div class="note info">
+      <span class="lbl">Как пополняется</span>
+      <p>Еженедельная сводка по воскресеньям, разборы кейсов в модулях, твои
+      находки из ленты и результаты твоих экспериментов. Последнее — самая ценная
+      часть, потому что она только твоя.</p>
+    </div>
+
+    <div class="card">
+      <h3>Стикерпак и шаблоны как рабочий инструмент дизайнера
+        <span class="pill">не пробовали</span></h3>
+      <p><strong>Механика.</strong> Не развлекательный стикерпак, а набор, которым
+      дизайнер реально пользуется: условные обозначения розеток и выводов для схем,
+      шаблоны для презентации клиенту, плашки «электрика», «тёплый пол», «вывод
+      под ТВ». Раздаётся за подписку или в обмен на контакт.</p>
+      <p><strong>Почему работает.</strong> Подарок-развлечение забывают через день.
+      Подарок-инструмент открывают каждую неделю — и каждый раз видят бренд
+      в момент, когда проектируют электрику. Это не реклама, а присутствие
+      в рабочем процессе.</p>
+      <p><strong>На кого бьёт.</strong> Спецификатор, этап «выбрать». Плюс собирает
+      базу контактов самой ценной роли.</p>
+      <p><strong>Почему может не сработать.</strong> Если набор сделан без запроса
+      от реальных дизайнеров, им никто не воспользуется. Проверить на трёх людях
+      до продакшна — это же попадает в задание модуля 1.</p>
+    </div>
+
+    <div class="card">
+      <h3>Контент для установщика, а не для покупателя
+        <span class="pill">не пробовали</span></h3>
+      <p><strong>Механика.</strong> Отдельная линия контента для электриков: как
+      быстро поставить, где типовые ошибки монтажа, чем клемма отличается
+      от чужой на практике. Язык профессиональный, без маркетинга.</p>
+      <p><strong>Почему работает.</strong> Электрик — скрытый блокатор сделки.
+      Контент, который экономит ему время на объекте, покупает лояльность дешевле
+      любой скидки.</p>
+      <p><strong>Почему может не сработать.</strong> Если снято маркетологом
+      «про монтаж», а не монтажником — засмеют в комментариях. Нужен реальный
+      носитель экспертизы в кадре и реальный объект, не студия.</p>
+    </div>
+
+    <div class="card">
+      <h3>Продукт в чужом проекте
+        <span class="pill">не пробовали</span></h3>
+      <p><strong>Механика.</strong> Систематический сбор и публикация реальных
+      интерьеров с твоим продуктом. Не рендеры, а фото готовых объектов
+      с указанием автора проекта.</p>
+      <p><strong>Почему работает.</strong> Закрывает главный страх дизайнера
+      («как это будет выглядеть вживую») и одновременно даёт ему публикацию
+      портфолио. Обмен, где обе стороны в плюсе, поэтому он самоподдерживающийся:
+      один опубликованный дизайнер приводит следующих.</p>
+      <p><strong>Почему может не сработать.</strong> Умрёт без постоянного потока.
+      Нужен ответственный и регулярность, иначе через два месяца выродится
+      в три поста.</p>
+    </div>
+
+    <div class="card">
+      <h3>Подборщик как лид-магнит
+        <span class="pill">не пробовали</span></h3>
+      <p><strong>Механика.</strong> Простой инструмент под реальный вопрос: сколько
+      метров тёплого пола на такую площадь, сколько розеток на комнату по нормам,
+      какая мощность под нагрузку. Результат сразу, контакт опционально.</p>
+      <p><strong>Почему работает.</strong> Человек приходит с конкретной задачей
+      и получает ответ, а не рекламу. Инструмент попадает в поисковую выдачу
+      и в нейропоиск, живёт годами и приводит людей в момент принятия решения.</p>
+      <p><strong>Почему может не сработать.</strong> Если спрятать результат
+      за обязательной формой — уйдут. Контакт просить после выдачи ответа, не до.</p>
+    </div>
+  </section>
+
+  </main>
+</div>
+
+<script>
+(function(){
+  var K='course20w:v1';
+  var state={};
+  try{ state=JSON.parse(localStorage.getItem(K)||'{}')||{}; }catch(e){ state={}; }
+  function save(){ try{ localStorage.setItem(K,JSON.stringify(state)); }catch(e){} }
+
+  /* ---- checklists ---- */
+  var hw0=[
+    ['b1','Скриншоты статистики соцсетей','Подписчики, охваты, вовлечение, переходы — на дату выхода'],
+    ['b2','Трафик сайта','За последний месяц'],
+    ['b3','Количество заявок в месяц','Сейчас, до твоей работы'],
+    ['b4','Сумма продаж с диджитал-каналов','За месяц или квартал'],
+    ['b5','Что компания вообще не считает','Тоже зафиксировать. Наладишь учёт — уже результат']
+  ];
+  var hw1=[
+    ['h1','1. Три сценария покупки','Кто участвует, кто называет бренд, кто платит, где покупка, когда решение ещё можно изменить. Источник — разговоры с менеджерами, не предположения. ~2 часа'],
+    ['h2','2. Три интервью','Дизайнер, электрик или прораб, и внутренний источник — менеджер продаж или дилер. По каждому: конспект, минимум 5 дословных цитат, одно что удивило. ~4 часа'],
+    ['h3','3. Разбор отзывов','50+ отзывов на конкурентов. Пять повторяющихся болей, каждая с тремя цитатами. Плюс 10 формулировок, которыми люди сами называют проблему. ~2 часа'],
+    ['h4','4. Таблица ролей','Роль · что для неё «хорошо» · критерий выбора · главный страх · где застать · чем зацепить. Каждая ячейка опирается на задания 2–3. ~1,5 часа'],
+    ['h5','5. Вывод','Какая роль хуже всего обслужена маркетингом конкурентов. Одно предложение плюс аргумент на 3–5 предложений со ссылками на данные. ~30 минут']
+  ];
+  function render(host,items,onChange){
+    var el=document.getElementById(host); if(!el) return;
+    items.forEach(function(it){
+      var lab=document.createElement('label');
+      lab.className='check'+(state[it[0]]?' done':'');
+      var box=document.createElement('input');
+      box.type='checkbox'; box.id=it[0]; box.checked=!!state[it[0]];
+      var body=document.createElement('div'); body.className='body';
+      var b=document.createElement('b'); b.textContent=it[1];
+      var s=document.createElement('span'); s.textContent=it[2];
+      body.appendChild(b); body.appendChild(s);
+      lab.appendChild(box); lab.appendChild(body);
+      box.addEventListener('change',function(){
+        state[it[0]]=box.checked; lab.classList.toggle('done',box.checked);
+        save(); if(onChange) onChange();
+      });
+      el.appendChild(lab);
+    });
+  }
+  function bar(){
+    var done=hw1.filter(function(i){return state[i[0]];}).length;
+    var fill=document.getElementById('barFill'), pct=document.getElementById('barPct');
+    if(fill) fill.style.width=(done/hw1.length*100)+'%';
+    if(pct) pct.textContent=done+' / '+hw1.length;
+  }
+  render('hw0',hw0);
+  render('hw1',hw1,bar);
+  bar();
+
+  /* ---- navigation ---- */
+  var pages=Array.prototype.slice.call(document.querySelectorAll('.page'));
+  var navBtns=Array.prototype.slice.call(document.querySelectorAll('.nav button[data-go]'));
+  var sidebar=document.getElementById('sidebar');
+  var tbTitle=document.getElementById('tbTitle');
+  var narrow=function(){ return window.matchMedia('(max-width:860px)').matches; };
+
+  function go(id){
+    pages.forEach(function(p){ p.hidden = (p.id!==id); });
+    navBtns.forEach(function(b){
+      b.setAttribute('aria-current', b.dataset.go===id ? 'true':'false');
+    });
+    var h=document.querySelector('#'+id+' h1');
+    if(h&&tbTitle) tbTitle.textContent=h.textContent;
+    if(narrow()){ sidebar.hidden=true; document.getElementById('menuBtn').setAttribute('aria-expanded','false'); }
+    window.scrollTo(0,0);
+    if(location.hash.slice(1)!==id){ history.replaceState(null,'','#'+id); }
+  }
+  document.addEventListener('click',function(e){
+    var t=e.target.closest('[data-go]'); if(!t) return;
+    go(t.dataset.go);
+  });
+
+  /* ---- mobile menu ---- */
+  function syncLayout(){
+    if(narrow()){ if(sidebar.hidden===false && !sidebar.dataset.open) sidebar.hidden=true; }
+    else { sidebar.hidden=false; }
+  }
+  document.getElementById('menuBtn').addEventListener('click',function(){
+    var open=sidebar.hidden;
+    sidebar.hidden=!open;
+    if(open){ sidebar.dataset.open='1'; } else { delete sidebar.dataset.open; }
+    this.setAttribute('aria-expanded', open?'true':'false');
+  });
+  window.addEventListener('resize',syncLayout);
+
+  /* ---- theme ---- */
+  document.getElementById('themeBtn').addEventListener('click',function(){
+    var root=document.documentElement;
+    var cur=root.getAttribute('data-theme');
+    var dark=cur ? cur==='dark'
+      : window.matchMedia('(prefers-color-scheme: dark)').matches;
+    root.setAttribute('data-theme', dark?'light':'dark');
+    state.theme=dark?'light':'dark'; save();
+  });
+  if(state.theme){ document.documentElement.setAttribute('data-theme',state.theme); }
+
+  /* ---- boot ---- */
+  var start=location.hash.slice(1);
+  var valid=pages.some(function(p){return p.id===start;});
+  go(valid?start:'home');
+  if(narrow()) sidebar.hidden=true;
+})();
+</script>
